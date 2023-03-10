@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+
+
+    <listeners>
+        <listener class-name="com.bookstore.framework.utils.listeners.AnnotationTransformer"/>
+    </listeners>
+
+    <test preserve-order="true" name="Smoke tests">
+        <parameter name="userName" value="test0103"/>
+        <parameter name="password" value="testPASS13#"/>
+        <parameter name="existingBookForSearch" value="Learning JavaScript Design Patterns"/>
+        <classes>
+            <class name="com.bookstore.tests.smoke.SmokeTest"></class>
+        </classes>
+    </test>
+</suite>
