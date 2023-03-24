@@ -1,7 +1,7 @@
 package com.bookstore.framework.base;
 
 import com.bookstore.framework.BookStore;
-import org.apache.log4j.Logger;
+import com.bookstore.framework.utils.report.Reporter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,28 +17,29 @@ public class BasePage {
 
     private final By pageHeader = By.xpath("//div[@class='main-header']");
 
-    public static final Logger logger = Logger.getLogger(BasePage.class);
 
-
-    protected void click(By element) {
+    protected void click(By element, String... msg) {
+        Reporter.log(msg);
         getElement(element).click();
     }
 
 
-    protected void clickForceWhenElementIsOverlapped(By element) throws InterruptedException {
+    protected void clickForceWhenElementIsOverlapped(By element, String... msg) throws InterruptedException {
+        Reporter.log(msg);
         //wait user to login
         Thread.sleep(1000);
         WebElement elem = getElement(element);
         JavascriptExecutor js = (JavascriptExecutor) BookStore.getDriver();
-        ;
         js.executeScript("arguments[0].click()", elem);
     }
 
-    protected void enterText(By element, String text) {
+    protected void enterText(By element, String text, String... msg) {
+        Reporter.log(msg);
         getElement(element).sendKeys(text);
     }
 
-    protected boolean isElementDisplayed(By element) {
+    protected boolean isElementDisplayed(By element, String... msg) {
+        Reporter.log(msg);
         return getElement(element).isDisplayed();
     }
 

@@ -34,7 +34,7 @@ public class BookStore {
      */
     public BookStore() throws Exception {
         logger.info("New driver initialization");
-        driver = DriversProvider.getNewDriver(BROWSER);
+        driver = DriversProvider.getInstance(BROWSER);
     }
 
     public static WebDriver getDriver() {
@@ -52,6 +52,7 @@ public class BookStore {
      * Method opens browser on start page
      */
     public void startApp() {
+        logger.info("Open start page");
         driver.get(BASE_URL);
     }
 

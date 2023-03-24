@@ -8,6 +8,6 @@ public class ProfilePage extends BasePage {
     By deleteAllBooksBTN = By.xpath("//button[contains(text(),'Delete All Books')]");
 
     public void deleteAllBooks() {
-        click(deleteAllBooksBTN);
+        click(deleteAllBooksBTN, "Delete all book from user profile");
     }
 }

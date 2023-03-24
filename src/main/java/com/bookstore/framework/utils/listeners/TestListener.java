@@ -1,6 +1,7 @@
 package com.bookstore.framework.utils.listeners;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.bookstore.framework.base.BaseTest;
 import org.apache.log4j.Logger;
@@ -8,10 +9,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.io.File;
-import java.util.Arrays;
-
-import static com.bookstore.framework.utils.Helpers.captureScreenshot;
+import static com.bookstore.framework.utils.Helpers.*;
 
 
 /**
@@ -20,38 +18,46 @@ import static com.bookstore.framework.utils.Helpers.captureScreenshot;
 public class TestListener implements ITestListener {
 
     static final Logger logger = Logger.getLogger(TestListener.class);
+
+    public static ExtentTest getNode() {
+        return node;
+    }
+
     private static ExtentTest node;
 
 
     @Override
     public void onTestStart(ITestResult result) {
-        logger.info("New TC started " + result.getName());
+        logger.info("New TC " + result.getName() + " started");
         node = BaseTest.getTest().createNode(result.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        logger.info("Test successfully finished " + result.getName());
+        logger.info("Test " + result.getName() + " successfully finished");
         node.log(Status.PASS, result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         String failedTest = result.getName();
-        String filePath = System.getProperty("user.dir") + File.separator + "target" + File.separator + "result" + File.separator;
         logger.error("Test " + failedTest + "was failed");
-        captureScreenshot(failedTest);
+        // ".." is added to screenshotPath in order to the extent report saw a screenshot
+        String screenshotPath = "../" + captureScreenshotAsFile(failedTest);
+        System.out.println("dddddddddddddddddddddddddddddd" + screenshotPath);
         // add failed test info
         node.log(Status.FAIL, result.getThrowable())
-                .addScreenCaptureFromPath(filePath + failedTest + ".png")
+               // .addScreenCaptureFromPath(screenshotPath)
+              //  .addScreenCaptureFromBase64String(captureScreenshotAsBase64())
+                .fail(MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build())
+              //  .fail(MediaEntityBuilder.createScreenCaptureFromBase64String(captureScreenshotAsBase64()).build())
                 .assignCategory(result.getMethod().getGroups())
-                .info(result.getMethod().getDescription())
-                .info(Arrays.toString(result.getMethod().getGroups()));
-    }
+                .info(result.getMethod().getDescription());
+   }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        logger.warn("Test was skipped " + result.getName());
+        logger.warn("Test " + result.getName() + " was skipped");
         node.log(Status.SKIP, result.getName());
     }
 

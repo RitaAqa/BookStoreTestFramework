@@ -8,9 +8,7 @@ UI Framework
 Structure of test framework:
 1. Use *.xml files to organize tests (test/resources/suites)
 2. Use pom.xml file to configure maven plugins
-3. Screenshots, logs and report are saved in target folder and corresponding sub-folders
-(results/, logs/, extent-reports/) 
-Notes: logs are overridden each time after mvn clean 
+3. Screenshots, logs and report are saved in reports folder
 4. common utils should be in main/java/com.bookstore.framework/utils folder
 5. data files, drivers, properties files should be in main/resources/
 6. default variables and settings should be in main/resources/common.properties file

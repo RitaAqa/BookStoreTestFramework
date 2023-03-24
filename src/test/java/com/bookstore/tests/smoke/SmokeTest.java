@@ -27,7 +27,7 @@ public class SmokeTest extends BaseTest {
     public void searchForExistingItem(String existingBookForSearch) throws InterruptedException {
         bookStore.startApp();
         bookStore.getLeftPanel().navigateToBookStorePage();
-        bookStore.getTopPanel().searchForExistingItem(existingBookForSearch);
+        bookStore.getTopPanel().searchForBook(existingBookForSearch);
         Assert.assertTrue(bookStore.getTopPanel().isBookDisplayed(existingBookForSearch), "Book is not displayed on Books Page");
     }
 
@@ -39,13 +39,13 @@ public class SmokeTest extends BaseTest {
         bookStore.getLeftPanel().navigateToLoginPage();
         bookStore.getLoginPage().login(userName, password);
         bookStore.getLeftPanel().navigateToBookStorePage();
-        bookStore.getTopPanel().searchForExistingItem(book);
+        bookStore.getTopPanel().searchForBook(book);
         bookStore.getBookStorePage().navigateToBookPage(book);
         bookStore.getBookPage().addBookToCollection();
         Assert.assertTrue(bookStore.getAlerts().isAddingBookNotificationAlertDisplayed(), "Adding book alert is not displayed");
         bookStore.getAlerts().closeAlert();
         bookStore.getLeftPanel().navigateToProfilePage();
-        bookStore.getTopPanel().searchForExistingItem(book);
+        bookStore.getTopPanel().searchForBook(book);
         Assert.assertTrue(bookStore.getTopPanel().isBookDisplayed(book), "Book is not displayed on Profile Page");
         bookStore.getProfilePage().deleteAllBooks();
         bookStore.getModals().getDeleteModal().confirmAllBookDeleting();

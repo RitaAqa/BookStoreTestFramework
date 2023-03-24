@@ -9,9 +9,6 @@ import org.openqa.selenium.io.FileHandler;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import static com.bookstore.framework.utils.PropertiesLoader.BASE_URL;
 
@@ -36,25 +33,33 @@ public class Helpers {
     }
 
     /**
-     * Method takes screenshot
+     * Method takes screenshot as File
+     * returns path to screenshot
      *
      * @param methodName
      */
-    public static void captureScreenshot(String methodName) {
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy MM d");
-        Calendar calendar = Calendar.getInstance();
-        String currentDate = dateFormat.format(calendar.getTime());
+    public static String captureScreenshotAsFile(String methodName) {
         String fileName = methodName + ".png";
-        String filePath = System.getProperty("user.dir") + File.separator + "target" + File.separator + "result" + File.separator;// + currentDate +  File.separator;
-
+        String filePath = "reports" + File.separator + "screenshots" + File.separator;
+        String imagePath = filePath + fileName;
+        File destination = new File(imagePath);
         try {
             File screenshot = ((TakesScreenshot) BookStore.getDriver()).getScreenshotAs(OutputType.FILE);
-            FileHandler.copy(screenshot, new File(filePath + fileName));
-            logger.error("Screenshot is taken");
-
+            FileHandler.copy(screenshot, destination);
+            logger.info("Screenshot is taken");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return imagePath;
+    }
+
+    /**
+     * Method takes screenshot as Base64 string
+     * returns path to screenshot
+     */
+    public static String captureScreenshotAsBase64() {
+        String base64Code = ((TakesScreenshot) BookStore.getDriver()).getScreenshotAs(OutputType.BASE64);
+        logger.info("Screenshot is taken");
+        return base64Code;
     }
 }

@@ -12,11 +12,11 @@ public class Modals extends BasePage {
         By cancelAllBooksDeletionBTN = By.id("closeSmallModal-cancel");
 
         public void confirmAllBookDeleting() {
-            click(confirmAllBooksDeletionBTN);
+            click(confirmAllBooksDeletionBTN, "Confirm all book deleting");
         }
 
         public void cancelAllBooksDeletion() {
-            click(cancelAllBooksDeletionBTN);
+            click(cancelAllBooksDeletionBTN, "Confirm all book deleting");
         }
     }
 

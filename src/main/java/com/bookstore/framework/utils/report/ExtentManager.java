@@ -5,6 +5,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,16 +22,18 @@ public class ExtentManager {
 
         return extent;
     }
+
     public static ExtentReports createInstance() {
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("MM_dd_yyyy");
 
-        ExtentSparkReporter reporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/target/extent-reports/" + ft.format(dNow) + "_WEB_" + "testreport.html");
+        ExtentSparkReporter reporter = new ExtentSparkReporter(System.getProperty("user.dir") +
+                File.separator + "reports" + File.separator + ft.format(dNow) + "_WEB_" + "testreport.html");
         //Set dashboard as default view of the report
         reporter.viewConfigurer().viewOrder().as(new ViewName[]{ViewName.DASHBOARD, ViewName.TEST, ViewName.CATEGORY, ViewName.EXCEPTION, ViewName.LOG});
         reporter.config().setReportName("Smoke Tests");
         reporter.config().setDocumentTitle("Smoke Tests");
-        reporter.config().setEncoding("utf-8");
+        reporter.config().setTimeStampFormat("yyyy/MM/dd hh:mm:ss a");
         reporter.config().setTheme(Theme.STANDARD);
 
         extent = new ExtentReports();

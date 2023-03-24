@@ -8,6 +8,6 @@ public class BookPage extends BasePage {
     By addBookToCollectionBTN = By.xpath("//button[@id='addNewRecordButton'][contains(text(), 'Add To Your Collection')]");
 
     public void addBookToCollection() {
-        click(addBookToCollectionBTN);
+        click(addBookToCollectionBTN, "Add book to collection");
     }
 }

@@ -10,18 +10,18 @@ public class LeftPanel extends BasePage {
 
     public void navigateToLoginPage() throws InterruptedException {
         if (!getCurrentPage().equals("Login")) {
-            clickForceWhenElementIsOverlapped(loginMenuItem);
+            clickForceWhenElementIsOverlapped(loginMenuItem, "Navigate to Login Page");
         }
     }
 
     public void navigateToBookStorePage() throws InterruptedException {
         if (!getCurrentPage().equals("Book Store")) {
-           clickForceWhenElementIsOverlapped(bookStoreMenuItem);
+           clickForceWhenElementIsOverlapped(bookStoreMenuItem, "Navigate to Book store Page");
         }
     }
 
     public void navigateToProfilePage() throws InterruptedException {
         if (!getCurrentPage().equals("Profile"));
-        clickForceWhenElementIsOverlapped(profileMenuItem);
+        clickForceWhenElementIsOverlapped(profileMenuItem, "Navigate to Profile Page");
     }
 }

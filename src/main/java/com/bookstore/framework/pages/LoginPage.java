@@ -10,8 +10,8 @@ public class LoginPage extends BasePage {
 
 
     public void login(String username, String password) {
-        enterText(userNameInput, username);
-        enterText(passwordInput, password);
-        click(loginBtn);
+        enterText(userNameInput, username, "Enter username: " + username);
+        enterText(passwordInput, password,"Enter password: " + password);
+        click(loginBtn, "Login to Book Store with credentials: " + username + "/" + password );
     }
 }

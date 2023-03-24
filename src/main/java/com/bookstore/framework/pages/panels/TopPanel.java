@@ -2,7 +2,6 @@ package com.bookstore.framework.pages.panels;
 
 import com.bookstore.framework.base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class TopPanel extends BasePage {
 
@@ -10,28 +9,26 @@ public class TopPanel extends BasePage {
     private final By logoutBtn = By.xpath("//button[contains(text(),'Log out')]");
     private final By searchField = By.id("searchBox");
 
-     public boolean isUserNameDisplayed() {
-        return isElementDisplayed(userNameLabel);
+    public boolean isUserNameDisplayed() {
+        return isElementDisplayed(userNameLabel, "Check if userName label is displayed");
     }
 
     public boolean isCorrectUserLoggedIn(String userName) {
         By loggedInUser = By.xpath("//*[contains(text(),'" + userName + "')]");
-        return isElementDisplayed(loggedInUser);
+        return isElementDisplayed(loggedInUser, "Check that " + userName + " is logged in");
     }
 
-    public boolean isBookDisplayed(String existingBookForSearch) {
-        By searchBook = By.linkText(existingBookForSearch);
-        return isElementDisplayed(searchBook);
+    public boolean isBookDisplayed(String bookForSearch) {
+        By searchBook = By.linkText(bookForSearch);
+        return isElementDisplayed(searchBook, "Check if " + bookForSearch + "is present in book list");
     }
 
 
     public void logout() {
-        click(logoutBtn);
+        click(logoutBtn, "Log out from app");
     }
 
-    public void searchForExistingItem(String existingBookForSearch) {
-        enterText(searchField, existingBookForSearch);
+    public void searchForBook(String bookForSearch) {
+        enterText(searchField, bookForSearch, "Search for book: " + bookForSearch);
     }
-
-
 }

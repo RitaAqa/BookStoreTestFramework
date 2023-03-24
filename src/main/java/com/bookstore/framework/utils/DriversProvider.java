@@ -15,7 +15,7 @@ public class DriversProvider {
      * @param browser - specifies browser for test
      * @throws Exception - if browser is not found
      */
-    public static WebDriver getNewDriver(String browser) throws Exception {
+    public static WebDriver getInstance(String browser) throws Exception {
         switch (browser) {
             case "chrome":
                 driver = Drivers.getChromeDriver();
